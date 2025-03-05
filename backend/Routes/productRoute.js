@@ -1,36 +1,22 @@
-const express = require("express");
-const { 
-  getAllProducts, 
-  getProductById, 
-  addProduct, 
-  updateProduct, 
-  deleteProduct 
-} = require("../Controllers/productController"); 
-const multer = require("multer");
-const path = require("path");
-
+const express = require('express');
+const multer = require('multer');
 const router = express.Router();
+const productController = require('../Controllers/productController');
 
-// Multer configuration for image upload
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, './uploads/');
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
+    cb(null, Date.now() + path.extname(file.originalname)); 
+  }
 });
 
-const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, 
-});
+const upload = multer({ storage: storage });
 
-// Define routes and connect them to controllers
-router.get("/", getAllProducts);
-router.get("/:id", getProductById);
-router.post("/", upload.single("image"), addProduct);
-router.put("/:id", upload.single("image"), updateProduct);
-router.delete("/:id", deleteProduct);
+router.post('/add', upload.single('image'), productController.addProduct); 
+router.get('/', productController.getAllProducts);
+router.put('/:productId', upload.single('image'), productController.editProduct); 
+router.delete('/:productId', productController.deleteProduct); 
 
 module.exports = router;
