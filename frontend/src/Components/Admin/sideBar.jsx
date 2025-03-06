@@ -1,9 +1,37 @@
-import React from 'react'
+import { Link } from "react-router-dom";
 
-const sideBar = () => {
+const Sidebar = () => {
   return (
-    <div>sideBar</div>
-  )
-}
+    <div className="w-64 bg-gray-800 text-white h-screen p-4">
+      <h2 className="text-2xl font-bold mb-6 text-blue-700">Gestion des Stock</h2>
+      <ul className="space-y-4">
+        <li>
+          <Link
+            to="/create"
+            className="block p-2 hover:bg-gray-700 rounded transition duration-300"
+          >
+            Ajouter un Produit
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/display"
+            className="block p-2 hover:bg-gray-700 rounded transition duration-300"
+          >
+            Afficher les Produits
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/comments"
+            className="block p-2 hover:bg-gray-700 rounded transition duration-300"
+          >
+            Gérer les Commentaires
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
 
-export default sideBar
+export default Sidebar;
