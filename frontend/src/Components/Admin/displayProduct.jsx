@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
+import {  useNavigate } from "react-router-dom";
+
 
 const DisplayProducts = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
