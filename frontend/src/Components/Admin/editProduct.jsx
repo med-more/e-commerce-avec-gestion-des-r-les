@@ -22,13 +22,15 @@ const EditProduct = () => {
       .get(`http://localhost:5000/api/products/${id}`)
       .then((response) => {
         setProduct(response.data);
-        setImagePreview(`http://localhost:5000${response.data.image}`); // Load existing image
+        // Construct the correct image URL
+        setImagePreview(`http://localhost:5000/${response.data.image}`);
       })
       .catch((error) => {
         console.error("Erreur:", error);
         toast.error("Erreur lors du chargement du produit");
       });
   }, [id]);
+  
 
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
